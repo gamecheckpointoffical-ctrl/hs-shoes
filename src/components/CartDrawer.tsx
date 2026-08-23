@@ -6,13 +6,16 @@ import { formatPrice } from '@/lib/utils/format';
 export default function CartDrawer() {
   const { items, isOpen, setIsOpen, removeItem, updateQuantity, subtotal, itemCount } = useCart();
 
+  const shippingCost = subtotal >= 15000 ? 0 : 300;
+  const total = subtotal + shippingCost;
+
   return (
     <>
-      {isOpen && <div className="fixed inset-0 z-[70] bg-ink/50 backdrop-blur-sm animate-fade-in" onClick={() => setIsOpen(false)} />}
+      {isOpen && <div className="fixed inset-0 z-[70] bg-ink/40 backdrop-blur-sm animate-fade-in" onClick={() => setIsOpen(false)} />}
       <div className={`fixed top-0 right-0 bottom-0 w-[440px] max-w-[90vw] bg-cream z-[80] transform transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex items-center justify-between p-8 border-b border-stone">
-          <h2 className="font-display text-xl">Your Cart <span className="text-sm text-ash">({itemCount})</span></h2>
-          <button onClick={() => setIsOpen(false)} aria-label="Close cart">
+        <div className="flex items-center justify-between p-8 border-b border-stone/60">
+          <h2 className="font-display text-xl text-ink">Your Cart <span className="text-sm text-ash">({itemCount})</span></h2>
+          <button onClick={() => setIsOpen(false)} aria-label="Close cart" className="text-ink hover:text-ash transition-colors">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M18 6 6 18M6 6l12 12" /></svg>
           </button>
         </div>
@@ -28,21 +31,21 @@ export default function CartDrawer() {
             <div className="space-y-8">
               {items.map((item, index) => (
                 <div key={index} className="flex gap-4">
-                  <div className="w-20 h-24 bg-stone flex-shrink-0 overflow-hidden">
+                  <div className="w-20 h-24 bg-cream-warm flex-shrink-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 flex flex-col">
-                    <Link href={`/shop/${item.slug}`} onClick={() => setIsOpen(false)} className="text-sm font-medium hover:text-ash transition-colors">{item.name}</Link>
+                    <Link href={`/shop/${item.slug}`} onClick={() => setIsOpen(false)} className="text-sm font-medium text-ink hover:text-ash transition-colors">{item.name}</Link>
                     <p className="text-[11px] text-ash mt-1 uppercase tracking-wide">{item.size} · {item.color}</p>
-                    <p className="text-sm mt-2">{formatPrice(item.price)}</p>
+                    <p className="text-sm mt-2 text-ink">{formatPrice(item.price)}</p>
                     <div className="flex items-center gap-4 mt-auto pt-2">
                       <div className="flex items-center gap-3">
-                        <button onClick={() => updateQuantity(index, item.quantity - 1)} className="text-xs text-ash hover:text-ink w-6 h-6 flex items-center justify-center border border-stone">−</button>
-                        <span className="text-xs">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(index, item.quantity + 1)} className="text-xs text-ash hover:text-ink w-6 h-6 flex items-center justify-center border border-stone">+</button>
+                        <button onClick={() => updateQuantity(index, item.quantity - 1)} className="text-xs text-ash hover:text-ink w-6 h-6 flex items-center justify-center border border-stone hover:border-ink transition-colors">−</button>
+                        <span className="text-xs text-ink">{item.quantity}</span>
+                        <button onClick={() => updateQuantity(index, item.quantity + 1)} className="text-xs text-ash hover:text-ink w-6 h-6 flex items-center justify-center border border-stone hover:border-ink transition-colors">+</button>
                       </div>
-                      <button onClick={() => removeItem(index)} className="text-[11px] text-ash hover:text-ink ml-auto uppercase tracking-wide">Remove</button>
+                      <button onClick={() => removeItem(index)} className="text-[10px] text-ash hover:text-ink uppercase tracking-wide ml-auto transition-colors">Remove</button>
                     </div>
                   </div>
                 </div>
@@ -52,14 +55,23 @@ export default function CartDrawer() {
         </div>
 
         {items.length > 0 && (
-          <div className="border-t border-stone p-8 space-y-5">
-            <div className="flex justify-between">
-              <span className="text-sm text-ash">Subtotal</span>
-              <span className="text-sm font-medium">{formatPrice(subtotal)}</span>
+          <div className="border-t border-stone/60 p-8">
+            <div className="space-y-3 mb-6">
+              <div className="flex justify-between">
+                <span className="text-sm text-ash">Subtotal</span>
+                <span className="text-sm text-ink">{formatPrice(subtotal)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-ash">Shipping</span>
+                <span className="text-sm text-ink">{shippingCost === 0 ? 'Free' : formatPrice(shippingCost)}</span>
+              </div>
             </div>
-            <p className="text-[11px] text-ash">Shipping calculated at checkout. Cash on Delivery available.</p>
-            <Link href="/checkout" onClick={() => setIsOpen(false)} className="btn-primary w-full"><span>Checkout</span></Link>
-            <Link href="/cart" onClick={() => setIsOpen(false)} className="btn-outline w-full text-center">View Cart</Link>
+            <div className="flex justify-between items-baseline border-t border-stone/60 pt-4 mb-6">
+              <span className="text-sm font-medium text-ink">Total</span>
+              <span className="text-lg font-medium text-ink font-display">{formatPrice(total)}</span>
+            </div>
+            <Link href="/checkout" onClick={() => setIsOpen(false)} className="btn-primary w-full mb-3"><span>Checkout</span></Link>
+            <p className="text-[11px] text-ash text-center font-light">Free shipping over PKR 15,000</p>
           </div>
         )}
       </div>

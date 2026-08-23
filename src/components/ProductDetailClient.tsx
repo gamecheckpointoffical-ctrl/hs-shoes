@@ -61,7 +61,7 @@ export default function ProductDetailClient({
           {showViewer ? (
             <ProductViewer3D
               images={images.map(i => ({ url: i.url, alt_text: i.alt_text }))}
-              modelType={product.model_type}
+              modelType={product.model_type as any}
               productName={product.name}
             />
           ) : (

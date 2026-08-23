@@ -21,8 +21,11 @@ export default function Hero({ image }: { image?: string }) {
           transition: 'transform 0.1s linear'
         }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image} alt="HS Shoes Signature Collection" className="w-full h-full object-cover" style={{ filter: 'brightness(0.88) contrast(1.05)' }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(250,248,244,0.15) 0%, rgba(250,248,244,0) 35%, rgba(250,248,244,0) 50%, rgba(250,248,244,0.7) 100%)' }} />
+          <img src={image} alt="HS Shoes Signature Collection" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) contrast(1.08) saturate(0.95)' }} />
+          {/* Gradient using new cream #F5F3EE */}
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(180deg, rgba(245,243,238,0.12) 0%, rgba(245,243,238,0) 30%, rgba(245,243,238,0) 45%, rgba(245,243,238,0.75) 100%)'
+          }} />
         </div>
       )}
       <div className="film-grain" />
@@ -33,26 +36,29 @@ export default function Hero({ image }: { image?: string }) {
           opacity: mounted ? 1 : 0
         }}>
           <div className="flex items-center justify-center gap-3 mb-10">
-            <span className="w-8 h-px bg-ink/30" />
-            <p className="text-[10px] uppercase tracking-[0.45em] text-ink/50 font-light">
+            <span className="w-8 h-px bg-ink/25" />
+            <p className="text-[10px] uppercase tracking-[0.45em] text-ink/45 font-light">
               Premium Luxury Footwear
             </p>
-            <span className="w-8 h-px bg-ink/30" />
+            <span className="w-8 h-px bg-ink/25" />
           </div>
           <h1 className="font-display text-hero text-ink mb-12 text-balance" style={{ lineHeight: '0.95' }}>
             Crafted to Be<br/>Remembered.
           </h1>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/shop" className="btn-primary"><span>Shop Collection</span></Link>
-            <Link href="/about" className="btn-outline">Explore HS</Link>
+            <Link href="/shop" className="btn-primary" data-cursor="shop"><span>Shop Collection</span></Link>
+            <Link href="/about" className="btn-outline" data-cursor="explore">Explore HS</Link>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
+      {/* Scroll indicator */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10" style={{
+        animation: mounted ? 'fadeIn 2s ease 1.5s both' : 'none'
+      }}>
         <div className="flex flex-col items-center gap-3">
-          <span className="text-[9px] uppercase tracking-[0.35em] text-ink/25">Scroll</span>
-          <div className="w-px h-20 bg-gradient-to-b from-ink/20 via-ink/15 to-transparent" />
+          <span className="text-[9px] uppercase tracking-[0.35em] text-ink/20">Scroll</span>
+          <div className="w-px h-20 bg-gradient-to-b from-ink/15 via-ink/10 to-transparent" />
         </div>
       </div>
     </section>
