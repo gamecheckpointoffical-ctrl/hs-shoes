@@ -28,38 +28,56 @@ export default async function HomePage() {
   const bestsellerImageMap: Record<string, string> = {};
   (bestsellerImages || []).forEach((img: ProductImage) => { if (!bestsellerImageMap[img.product_id]) bestsellerImageMap[img.product_id] = img.url; });
 
+  const allProducts = (featuredProducts || []) as Product[];
+  const heroImage = allProducts[0]?.thumbnail_url || imageMap[allProducts[0]?.id || ''];
+
   return (
     <div>
-      <Hero image={featuredProducts?.[0]?.thumbnail_url || imageMap[featuredProducts?.[0]?.id || '']} />
+      {/* Hero */}
+      <Hero image={heroImage} />
 
+      {/* Featured Collection */}
       <section className="section-pad">
         <div className="container-lux">
-          <div className="text-center mb-16">
-            <p className="text-xs uppercase tracking-widest text-ash mb-3">Signature Collection</p>
-            <h2 className="font-display text-3xl md:text-5xl text-balance">Crafted for those who notice the details.</h2>
+          <div className="text-center mb-20">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-4 font-light">Signature Collection</p>
+            <h2 className="font-display text-3xl md:text-[44px] text-balance leading-tight max-w-2xl mx-auto">
+              Crafted for those who notice the details.
+            </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {(featuredProducts || []).map((product: Product) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
+            {allProducts.map((product: Product) => (
               <ProductCard key={product.id} product={product} image={imageMap[product.id] || product.thumbnail_url || ''} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-ink text-cream py-20 md:py-32 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xs uppercase tracking-widest text-cream/40 mb-4">Interactive Experience</p>
-          <h2 className="font-display text-3xl md:text-5xl mb-6 text-balance">Explore every angle. Hold the shoe in your hands—virtually.</h2>
-          <p className="text-cream/60 text-lg max-w-2xl mx-auto leading-relaxed">Our interactive viewer lets you rotate, zoom, and examine each pair from every perspective.</p>
+      {/* 3D Experience */}
+      <section className="bg-ink text-cream py-24 md:py-40 px-6 relative overflow-hidden">
+        <div className="film-grain" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-cream/30 mb-5 font-light">Interactive Experience</p>
+          <h2 className="font-display text-3xl md:text-[44px] mb-8 text-balance leading-tight">
+            Explore every angle.<br/>Hold the shoe in your hands—virtually.
+          </h2>
+          <p className="text-cream/50 text-lg max-w-2xl mx-auto leading-relaxed font-light">
+            Our interactive viewer lets you rotate, zoom, and examine each pair from every perspective.
+            Because true luxury deserves to be seen from all sides.
+          </p>
         </div>
       </section>
 
+      {/* New Arrivals */}
       <section className="section-pad">
         <div className="container-lux">
-          <div className="flex items-end justify-between mb-12">
-            <div><p className="text-xs uppercase tracking-widest text-ash mb-2">Just Arrived</p><h2 className="font-display text-3xl md:text-4xl">New Arrivals</h2></div>
+          <div className="flex items-end justify-between mb-16">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-3 font-light">Just Arrived</p>
+              <h2 className="font-display text-3xl md:text-[40px]">New Arrivals</h2>
+            </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
             {(newArrivals || []).map((product: Product) => (
               <ProductCard key={product.id} product={product} image={newArrivalImageMap[product.id] || product.thumbnail_url || ''} />
             ))}
@@ -67,30 +85,46 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-stone py-20 md:py-32 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+      {/* Craftsmanship */}
+      <section className="bg-stone py-24 md:py-40 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           <div>
-            <p className="text-xs uppercase tracking-widest text-ash mb-4">Craftsmanship</p>
-            <h2 className="font-display text-3xl md:text-4xl mb-6 text-balance">Every stitch tells a story.</h2>
-            <p className="text-ash leading-relaxed mb-6">Each pair of HS Shoes is hand-finished by master craftsmen using time-honored techniques. From premium full-grain leather to the final hand-burnished finish, every step is an act of dedication.</p>
-            <div className="grid grid-cols-2 gap-6">
-              <div><p className="font-display text-3xl mb-1">72h</p><p className="text-xs text-ash uppercase tracking-widest">Per Pair</p></div>
-              <div><p className="font-display text-3xl mb-1">100%</p><p className="text-xs text-ash uppercase tracking-widest">Hand-Finished</p></div>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-5 font-light">Craftsmanship</p>
+            <h2 className="font-display text-3xl md:text-[40px] mb-8 text-balance leading-tight">
+              Every stitch tells a story.
+            </h2>
+            <p className="text-ash leading-relaxed mb-10 font-light text-[15px]">
+              Each pair of HS Shoes is hand-finished by master craftsmen using time-honored techniques.
+              From premium full-grain leather to the final hand-burnished finish, every step is an act of dedication.
+            </p>
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <p className="font-display text-4xl mb-2">72h</p>
+                <p className="text-[11px] text-ash uppercase tracking-[0.2em]">Per Pair</p>
+              </div>
+              <div>
+                <p className="font-display text-4xl mb-2">100%</p>
+                <p className="text-[11px] text-ash uppercase tracking-[0.2em]">Hand-Finished</p>
+              </div>
             </div>
           </div>
-          <div className="aspect-[4/5] bg-ink/10 overflow-hidden">
+          <div className="aspect-[4/5] bg-ink/10 overflow-hidden img-hover">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="https://auuhlwrasczevtflpfmu.supabase.co/storage/v1/object/public/hs-shoes/products/c7ce50d0b_WhatsAppImage2026-04-25at102445AM.jpg" alt="HS Shoes craftsmanship" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
 
+      {/* Bestsellers */}
       <section className="section-pad">
         <div className="container-lux">
-          <div className="flex items-end justify-between mb-12">
-            <div><p className="text-xs uppercase tracking-widest text-ash mb-2">Most Loved</p><h2 className="font-display text-3xl md:text-4xl">Bestsellers</h2></div>
+          <div className="flex items-end justify-between mb-16">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-3 font-light">Most Loved</p>
+              <h2 className="font-display text-3xl md:text-[40px]">Bestsellers</h2>
+            </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
             {(bestsellers || []).map((product: Product) => (
               <ProductCard key={product.id} product={product} image={bestsellerImageMap[product.id] || product.thumbnail_url || ''} />
             ))}
@@ -98,20 +132,30 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-ink text-cream py-20 md:py-32 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-xs uppercase tracking-widest text-cream/40 mb-6">Our Story</p>
-          <h2 className="font-display text-3xl md:text-5xl mb-8 text-balance leading-tight">We believe a shoe is more than footwear. It is a statement, a memory, a companion on the journeys that define us.</h2>
-          <p className="text-cream/60 leading-relaxed mb-8">HS Shoes was founded on a simple principle: that luxury should not be loud, but felt. Every pair we create is an expression of restraint, quality, and timeless design—crafted to be remembered.</p>
-          <a href="/about" className="inline-flex items-center gap-2 text-xs uppercase tracking-widest border-b border-cream/40 pb-1 hover:border-cream transition-colors">Discover Our Story</a>
+      {/* Brand Story */}
+      <section className="bg-ink text-cream py-24 md:py-40 px-6 relative overflow-hidden">
+        <div className="film-grain" />
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-cream/30 mb-8 font-light">Our Story</p>
+          <h2 className="font-display text-3xl md:text-[44px] mb-10 text-balance leading-tight">
+            We believe a shoe is more than footwear. It is a statement, a memory, a companion on the journeys that define us.
+          </h2>
+          <p className="text-cream/50 leading-relaxed mb-10 font-light text-[15px]">
+            HS Shoes was founded on a simple principle: that luxury should not be loud, but felt.
+            Every pair we create is an expression of restraint, quality, and timeless design—crafted to be remembered.
+          </p>
+          <a href="/about" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] border-b border-cream/30 pb-1.5 hover:border-cream transition-colors">
+            Discover Our Story
+          </a>
         </div>
       </section>
 
-      <section className="py-20 md:py-32 px-6 border-b border-stone">
+      {/* Newsletter */}
+      <section className="py-24 md:py-40 px-6 border-b border-stone">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-xs uppercase tracking-widest text-ash mb-4">Stay Connected</p>
-          <h2 className="font-display text-3xl md:text-4xl mb-4 text-balance">Join the HS Circle</h2>
-          <p className="text-ash mb-8">Be the first to know about new arrivals, exclusive offers, and stories from the workshop.</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-5 font-light">Stay Connected</p>
+          <h2 className="font-display text-3xl md:text-[40px] mb-5 text-balance">Join the HS Circle</h2>
+          <p className="text-ash mb-10 font-light text-[15px]">Be the first to know about new arrivals, exclusive offers, and stories from the workshop.</p>
           <NewsletterForm />
         </div>
       </section>

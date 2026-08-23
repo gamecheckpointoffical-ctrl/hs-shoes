@@ -6,8 +6,8 @@ import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import { CartProvider } from '@/context/CartContext';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif', display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'HS Shoes — Premium Footwear',
@@ -18,11 +18,6 @@ export const metadata: Metadata = {
     description: 'Crafted to Be Remembered. Premium luxury footwear.',
     type: 'website',
     siteName: 'HS Shoes',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'HS Shoes — Premium Footwear',
-    description: 'Crafted to Be Remembered. Premium luxury footwear.',
   },
 };
 

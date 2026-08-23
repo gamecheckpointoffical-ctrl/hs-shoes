@@ -16,19 +16,21 @@ export default function NewsletterForm() {
     setDone(true);
   };
 
-  if (done) return <p className="text-sm text-ash">Welcome to the HS Circle.</p>;
+  if (done) return <p className="text-sm text-cream/50">Welcome to the HS Circle.</p>;
 
   return (
-    <form className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto" onSubmit={handleSubmit}>
+    <form className="flex gap-0 w-full" onSubmit={handleSubmit}>
       <input
         type="email"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email address"
-        className="flex-1 border border-ink/20 px-4 py-4 text-sm focus:outline-none focus:border-ink bg-transparent"
+        className="flex-1 bg-transparent border border-cream/20 px-4 py-3.5 text-sm text-cream placeholder:text-cream/30 focus:outline-none focus:border-cream/60"
       />
-      <button type="submit" className="btn-primary sm:ml-0">Subscribe</button>
+      <button type="submit" className="px-8 py-3.5 bg-cream text-ink text-[11px] uppercase tracking-[0.15em] hover:bg-cream/90 transition-colors">
+        Subscribe
+      </button>
     </form>
   );
 }
