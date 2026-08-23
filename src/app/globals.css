@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0A0A0A;
+  --cream: #F8F6F1;
+  --stone: #E8E4DC;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: #c4bfb5; border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: #a8a39a; }
+
+/* Typography */
+.font-display {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Link underline */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* Image hover */
+.img-hover {
+  overflow: hidden;
+}
+.img-hover img {
+  transition: transform 0.6s ease;
+}
+.img-hover:hover img {
+  transform: scale(1.05);
+}
+
+/* Product card */
+.product-card {
+  cursor: pointer;
+}
+
+/* Section spacing */
+.section-pad {
+  padding: 80px 0;
+}
+@media (min-width: 768px) {
+  .section-pad { padding: 120px 0; }
+}
+
+/* Container */
+.container-lux {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@media (min-width: 768px) {
+  .container-lux { padding: 0 48px; }
+}
+
+/* Loading */
+.skeleton {
+  background: linear-gradient(90deg, #e8e4dc 25%, #f0eee9 50%, #e8e4dc 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
