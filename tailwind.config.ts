@@ -9,16 +9,16 @@ const config: Config = {
     extend: {
       colors: {
         ink: "#0A0A0A",
-        cream: "#F8F6F1",
-        stone: "#E8E4DC",
-        ash: "#9B9588",
+        "ink-soft": "#1A1A1A",
+        cream: "#F5F3EE",
+        "cream-warm": "#ECE8E1",
+        stone: "#D8D2C8",
+        ash: "#8B8478",
         gold: "#A88B5C",
-        sand: "#D4C5A9",
       },
       fontFamily: {
-        serif: ["Georgia", "Times New Roman", "serif"],
-        sans: ["-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "Arial", "sans-serif"],
-        mono: ["Menlo", "Monaco", "Courier New", "monospace"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
       },
       fontSize: {
         "display": ["clamp(2.5rem, 6vw, 5rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],

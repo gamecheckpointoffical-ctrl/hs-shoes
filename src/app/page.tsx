@@ -38,7 +38,7 @@ export default async function HomePage() {
       {/* Philosophy Quote */}
       <section className="py-24 md:py-40 px-6 bg-cream">
         <div className="max-w-3xl mx-auto text-center">
-          <span className="font-display text-5xl text-ash/30 leading-none mb-8 block">"</span>
+          <span className="font-display text-5xl text-stone leading-none mb-8 block">"</span>
           <blockquote className="font-display text-2xl md:text-[34px] text-ink text-balance leading-[1.3] mb-10">
             A gentleman is known by the shoes he wears — and the silence with which he wears them.
           </blockquote>
@@ -46,7 +46,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Featured */}
+      {/* Featured Collection */}
       <section className="section-pad border-t border-stone">
         <div className="container-lux">
           <div className="text-center mb-20">
@@ -67,27 +67,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 3D Experience */}
-      <section className="bg-ink text-cream py-28 md:py-44 px-6 relative overflow-hidden">
-        <div className="film-grain" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="w-6 h-px bg-cream/20" />
-            <p className="text-[10px] uppercase tracking-[0.35em] text-cream/30 font-light">Interactive Experience</p>
-            <span className="w-6 h-px bg-cream/20" />
-          </div>
-          <h2 className="font-display text-3xl md:text-[44px] mb-10 text-balance leading-tight">
-            Explore every angle.<br/>Hold the shoe in your hands—virtually.
-          </h2>
-          <p className="text-cream/40 text-[15px] max-w-2xl mx-auto leading-relaxed font-light">
-            Our interactive viewer lets you rotate, zoom, and examine each pair from every perspective.
-            Because true luxury deserves to be seen from all sides.
-          </p>
-        </div>
-      </section>
-
       {/* New Arrivals */}
-      <section className="section-pad">
+      <section className="section-pad border-t border-stone">
         <div className="container-lux">
           <div className="flex items-end justify-between mb-20">
             <div>
@@ -104,7 +85,7 @@ export default async function HomePage() {
       </section>
 
       {/* Craftsmanship */}
-      <section className="bg-stone py-28 md:py-44 px-6">
+      <section className="bg-cream-warm py-28 md:py-44 px-6">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-28 items-center">
           <div>
             <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-6 font-light">Craftsmanship</p>
@@ -126,7 +107,7 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-          <div className="aspect-[4/5] bg-ink/10 overflow-hidden img-hover">
+          <div className="aspect-[4/5] bg-stone overflow-hidden img-hover">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="https://auuhlwrasczevtflpfmu.supabase.co/storage/v1/object/public/hs-shoes/products/c7ce50d0b_WhatsAppImage2026-04-25at102445AM.jpg" alt="HS Shoes craftsmanship" className="w-full h-full object-cover" />
           </div>
@@ -150,7 +131,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Brand Story */}
+      {/* Brand Story — on black */}
       <section className="bg-ink text-cream py-28 md:py-44 px-6 relative overflow-hidden">
         <div className="film-grain" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
