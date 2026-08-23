@@ -33,19 +33,22 @@ export default async function HomePage() {
 
   return (
     <div>
-      {/* Hero */}
       <Hero image={heroImage} />
 
-      {/* Featured Collection */}
+      {/* Featured */}
       <section className="section-pad">
         <div className="container-lux">
           <div className="text-center mb-20">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-4 font-light">Signature Collection</p>
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <span className="w-6 h-px bg-stone" />
+              <p className="text-[10px] uppercase tracking-[0.35em] text-ash font-light">Signature Collection</p>
+              <span className="w-6 h-px bg-stone" />
+            </div>
             <h2 className="font-display text-3xl md:text-[44px] text-balance leading-tight max-w-2xl mx-auto">
               Crafted for those who notice the details.
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
             {allProducts.map((product: Product) => (
               <ProductCard key={product.id} product={product} image={imageMap[product.id] || product.thumbnail_url || ''} />
             ))}
@@ -54,14 +57,18 @@ export default async function HomePage() {
       </section>
 
       {/* 3D Experience */}
-      <section className="bg-ink text-cream py-24 md:py-40 px-6 relative overflow-hidden">
+      <section className="bg-ink text-cream py-28 md:py-44 px-6 relative overflow-hidden">
         <div className="film-grain" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-cream/30 mb-5 font-light">Interactive Experience</p>
-          <h2 className="font-display text-3xl md:text-[44px] mb-8 text-balance leading-tight">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="w-6 h-px bg-cream/20" />
+            <p className="text-[10px] uppercase tracking-[0.35em] text-cream/30 font-light">Interactive Experience</p>
+            <span className="w-6 h-px bg-cream/20" />
+          </div>
+          <h2 className="font-display text-3xl md:text-[44px] mb-10 text-balance leading-tight">
             Explore every angle.<br/>Hold the shoe in your hands—virtually.
           </h2>
-          <p className="text-cream/50 text-lg max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="text-cream/40 text-[15px] max-w-2xl mx-auto leading-relaxed font-light">
             Our interactive viewer lets you rotate, zoom, and examine each pair from every perspective.
             Because true luxury deserves to be seen from all sides.
           </p>
@@ -71,13 +78,13 @@ export default async function HomePage() {
       {/* New Arrivals */}
       <section className="section-pad">
         <div className="container-lux">
-          <div className="flex items-end justify-between mb-16">
+          <div className="flex items-end justify-between mb-20">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-3 font-light">Just Arrived</p>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-4 font-light">Just Arrived</p>
               <h2 className="font-display text-3xl md:text-[40px]">New Arrivals</h2>
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
             {(newArrivals || []).map((product: Product) => (
               <ProductCard key={product.id} product={product} image={newArrivalImageMap[product.id] || product.thumbnail_url || ''} />
             ))}
@@ -86,25 +93,25 @@ export default async function HomePage() {
       </section>
 
       {/* Craftsmanship */}
-      <section className="bg-stone py-24 md:py-40 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
+      <section className="bg-stone py-28 md:py-44 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-28 items-center">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-5 font-light">Craftsmanship</p>
-            <h2 className="font-display text-3xl md:text-[40px] mb-8 text-balance leading-tight">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-6 font-light">Craftsmanship</p>
+            <h2 className="font-display text-3xl md:text-[40px] mb-10 text-balance leading-tight">
               Every stitch tells a story.
             </h2>
-            <p className="text-ash leading-relaxed mb-10 font-light text-[15px]">
+            <p className="text-ash leading-relaxed mb-12 font-light text-[15px]">
               Each pair of HS Shoes is hand-finished by master craftsmen using time-honored techniques.
               From premium full-grain leather to the final hand-burnished finish, every step is an act of dedication.
             </p>
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 gap-10">
               <div>
-                <p className="font-display text-4xl mb-2">72h</p>
-                <p className="text-[11px] text-ash uppercase tracking-[0.2em]">Per Pair</p>
+                <p className="font-display text-5xl mb-2">72h</p>
+                <p className="text-[10px] text-ash uppercase tracking-[0.25em]">Per Pair</p>
               </div>
               <div>
-                <p className="font-display text-4xl mb-2">100%</p>
-                <p className="text-[11px] text-ash uppercase tracking-[0.2em]">Hand-Finished</p>
+                <p className="font-display text-5xl mb-2">100%</p>
+                <p className="text-[10px] text-ash uppercase tracking-[0.25em]">Hand-Finished</p>
               </div>
             </div>
           </div>
@@ -118,13 +125,13 @@ export default async function HomePage() {
       {/* Bestsellers */}
       <section className="section-pad">
         <div className="container-lux">
-          <div className="flex items-end justify-between mb-16">
+          <div className="flex items-end justify-between mb-20">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-3 font-light">Most Loved</p>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-4 font-light">Most Loved</p>
               <h2 className="font-display text-3xl md:text-[40px]">Bestsellers</h2>
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
             {(bestsellers || []).map((product: Product) => (
               <ProductCard key={product.id} product={product} image={bestsellerImageMap[product.id] || product.thumbnail_url || ''} />
             ))}
@@ -133,29 +140,29 @@ export default async function HomePage() {
       </section>
 
       {/* Brand Story */}
-      <section className="bg-ink text-cream py-24 md:py-40 px-6 relative overflow-hidden">
+      <section className="bg-ink text-cream py-28 md:py-44 px-6 relative overflow-hidden">
         <div className="film-grain" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-cream/30 mb-8 font-light">Our Story</p>
-          <h2 className="font-display text-3xl md:text-[44px] mb-10 text-balance leading-tight">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-cream/25 mb-10 font-light">Our Story</p>
+          <h2 className="font-display text-3xl md:text-[44px] mb-12 text-balance leading-tight">
             We believe a shoe is more than footwear. It is a statement, a memory, a companion on the journeys that define us.
           </h2>
-          <p className="text-cream/50 leading-relaxed mb-10 font-light text-[15px]">
+          <p className="text-cream/40 leading-relaxed mb-12 font-light text-[15px]">
             HS Shoes was founded on a simple principle: that luxury should not be loud, but felt.
             Every pair we create is an expression of restraint, quality, and timeless design—crafted to be remembered.
           </p>
-          <a href="/about" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] border-b border-cream/30 pb-1.5 hover:border-cream transition-colors">
+          <a href="/about" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] border-b border-cream/20 pb-2 hover:border-cream transition-colors">
             Discover Our Story
           </a>
         </div>
       </section>
 
       {/* Newsletter */}
-      <section className="py-24 md:py-40 px-6 border-b border-stone">
+      <section className="py-28 md:py-44 px-6 border-b border-stone">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-ash mb-5 font-light">Stay Connected</p>
-          <h2 className="font-display text-3xl md:text-[40px] mb-5 text-balance">Join the HS Circle</h2>
-          <p className="text-ash mb-10 font-light text-[15px]">Be the first to know about new arrivals, exclusive offers, and stories from the workshop.</p>
+          <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-6 font-light">Stay Connected</p>
+          <h2 className="font-display text-3xl md:text-[40px] mb-6 text-balance">Join the HS Circle</h2>
+          <p className="text-ash mb-12 font-light text-[15px]">Be the first to know about new arrivals, exclusive offers, and stories from the workshop.</p>
           <NewsletterForm />
         </div>
       </section>

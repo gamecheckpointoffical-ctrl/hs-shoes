@@ -7,7 +7,7 @@ import CartDrawer from '@/components/CartDrawer';
 import { CartProvider } from '@/context/CartContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif', display: 'swap' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '500', '600', '700'], display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'HS Shoes — Premium Footwear',
