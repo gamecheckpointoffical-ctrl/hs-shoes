@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import MagneticButton from './MagneticButton';
 
 export default function Hero({ image }: { image?: string }) {
@@ -15,16 +14,17 @@ export default function Hero({ image }: { image?: string }) {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-cream">
+    <section className="relative h-screen w-full overflow-hidden bg-ink">
       {image && (
         <div className="absolute inset-0" style={{
           transform: `translateY(${scrollY * 0.25}px) scale(${mounted ? 1 : 1.15})`,
           transition: 'transform 0.1s linear'
         }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image} alt="HS Shoes Signature Collection" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) contrast(1.08) saturate(0.95)' }} />
+          <img src={image} alt="HS Shoes Signature Collection" className="w-full h-full object-cover" style={{ filter: 'brightness(0.65) contrast(1.1) saturate(0.85)' }} />
+          {/* Brown gradient overlay */}
           <div className="absolute inset-0" style={{
-            background: 'linear-gradient(180deg, rgba(245,243,238,0.12) 0%, rgba(245,243,238,0) 30%, rgba(245,243,238,0) 45%, rgba(245,243,238,0.75) 100%)'
+            background: 'linear-gradient(180deg, rgba(31,22,17,0.5) 0%, rgba(31,22,17,0.2) 30%, rgba(31,22,17,0.3) 50%, rgba(31,22,17,0.85) 100%)'
           }} />
         </div>
       )}
@@ -36,13 +36,13 @@ export default function Hero({ image }: { image?: string }) {
           opacity: mounted ? 1 : 0
         }}>
           <div className="flex items-center justify-center gap-3 mb-10">
-            <span className="w-8 h-px bg-ink/25" />
-            <p className="text-[10px] uppercase tracking-[0.45em] text-ink/45 font-light">
+            <span className="w-8 h-px bg-gold/40" />
+            <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80 font-light">
               Premium Luxury Footwear
             </p>
-            <span className="w-8 h-px bg-ink/25" />
+            <span className="w-8 h-px bg-gold/40" />
           </div>
-          <h1 className="font-display text-hero text-ink mb-12 text-balance" style={{ lineHeight: '0.95' }}>
+          <h1 className="font-display text-hero text-cream mb-12 text-balance" style={{ lineHeight: '0.95' }}>
             Crafted to Be<br/>Remembered.
           </h1>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -61,8 +61,8 @@ export default function Hero({ image }: { image?: string }) {
         animation: mounted ? 'fadeIn 2s ease 1.5s both' : 'none'
       }}>
         <div className="flex flex-col items-center gap-3">
-          <span className="text-[9px] uppercase tracking-[0.35em] text-ink/20">Scroll</span>
-          <div className="w-px h-20 bg-gradient-to-b from-ink/15 via-ink/10 to-transparent" />
+          <span className="text-[9px] uppercase tracking-[0.35em] text-cream/30">Scroll</span>
+          <div className="w-px h-20 bg-gradient-to-b from-gold/30 via-cream/15 to-transparent" />
         </div>
       </div>
     </section>

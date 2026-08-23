@@ -14,7 +14,7 @@ export default function NewsletterForm({ dark = false }: { dark?: boolean }) {
 
   if (status === 'success') {
     return (
-      <p className={`text-sm font-light ${dark ? 'text-cream/60' : 'text-ash'}`}>
+      <p className="text-sm font-light text-gold">
         Thank you for joining the HS Circle.
       </p>
     );
@@ -29,10 +29,10 @@ export default function NewsletterForm({ dark = false }: { dark?: boolean }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email address"
-          className={`flex-1 px-5 py-4 text-sm bg-transparent border-b ${dark ? 'border-cream/20 text-cream placeholder:text-cream/30 focus:border-cream' : 'border-stone text-ink placeholder:text-ash focus:border-ink'} transition-colors outline-none`}
+          className={`flex-1 px-5 py-4 text-sm bg-transparent border-b ${dark ? 'border-stone/60 text-cream placeholder:text-ash focus:border-gold' : 'border-stone text-cream placeholder:text-ash focus:border-gold'} transition-colors outline-none`}
         />
         <button type="submit" disabled={status === 'loading'}
-          className={`px-8 py-4 text-[10px] uppercase tracking-[0.2em] border-b transition-colors ${dark ? 'border-cream/20 text-cream hover:border-cream' : 'border-stone text-ink hover:border-ink'} ${status === 'loading' ? 'opacity-30' : ''}`}>
+          className={`px-8 py-4 text-[10px] uppercase tracking-[0.2em] border-b transition-colors ${dark ? 'border-stone/60 text-gold hover:border-gold' : 'border-stone text-gold hover:border-gold'} ${status === 'loading' ? 'opacity-30' : ''}`}>
           {status === 'loading' ? '...' : 'Subscribe'}
         </button>
       </div>

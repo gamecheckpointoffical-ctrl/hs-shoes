@@ -8,13 +8,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0A0A0A",
-        "ink-soft": "#1A1A1A",
-        cream: "#F5F3EE",
-        "cream-warm": "#ECE8E1",
-        stone: "#D8D2C8",
-        ash: "#8B8478",
-        gold: "#A88B5C",
+        // Deep espresso — primary dark
+        ink: "#1F1611",
+        "ink-soft": "#2A1F17",
+        // Warm ivory — text on dark
+        cream: "#E8DCC8",
+        "cream-warm": "#D4C9B5",
+        // Warm taupe — borders, dividers
+        stone: "#3D2E22",
+        // Muted brown — secondary text
+        ash: "#9A8B73",
+        // Copper gold — accents
+        gold: "#B8895A",
+        // Light cream — for light sections
+        sand: "#F0E6D6",
+        // Rich mocha — hover states
+        mocha: "#6B4E3D",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "serif"],

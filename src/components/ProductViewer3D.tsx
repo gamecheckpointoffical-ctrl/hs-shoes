@@ -19,10 +19,7 @@ export default function ProductViewer3D({
 
   setTimeout(() => setLoading(false), 500);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.clientX);
-  };
+  const handleMouseDown = (e: React.MouseEvent) => { setIsDragging(true); setStartX(e.clientX); };
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
     const delta = e.clientX - startX;
@@ -30,11 +27,7 @@ export default function ProductViewer3D({
     setStartX(e.clientX);
   };
   const handleMouseUp = () => setIsDragging(false);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].clientX);
-  };
+  const handleTouchStart = (e: React.TouchEvent) => { setIsDragging(true); setStartX(e.touches[0].clientX); };
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging) return;
     const delta = e.touches[0].clientX - startX;
@@ -44,22 +37,17 @@ export default function ProductViewer3D({
   const handleTouchEnd = () => setIsDragging(false);
 
   if (images.length === 0) {
-    return (
-      <div className="aspect-square bg-cream-warm flex items-center justify-center">
-        <p className="text-sm text-ash">No images available</p>
-      </div>
-    );
+    return <div className="aspect-square bg-ink-soft flex items-center justify-center"><p className="text-sm text-ash">No images available</p></div>;
   }
 
-  // Use up to 8 frames for the 360 experience
   const frameCount = Math.min(images.length, 8);
   const currentFrame = Math.abs(Math.floor(rotation / 45)) % frameCount;
   const displayImage = images[currentFrame] || images[0];
 
   if (loading) {
     return (
-      <div className="aspect-square bg-cream-warm flex items-center justify-center">
-        <div className="w-8 h-8 border border-stone border-t-ink rounded-full animate-spin" />
+      <div className="aspect-square bg-ink-soft flex items-center justify-center">
+        <div className="w-8 h-8 border border-stone border-t-gold rounded-full animate-spin" />
       </div>
     );
   }
@@ -67,7 +55,7 @@ export default function ProductViewer3D({
   return (
     <div className="relative">
       <div
-        className="aspect-square bg-cream-warm overflow-hidden relative cursor-grab active:cursor-grabbing select-none"
+        className="aspect-square bg-ink-soft overflow-hidden relative cursor-grab active:cursor-grabbing select-none"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -77,26 +65,15 @@ export default function ProductViewer3D({
         onTouchEnd={handleTouchEnd}
         data-cursor="drag"
       >
-        <Image
-          src={displayImage.url}
-          alt={displayImage.alt_text || productName}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain"
-          draggable={false}
-        />
+        <Image src={displayImage.url} alt={displayImage.alt_text || productName} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain" draggable={false} />
       </div>
-
       <div className="mt-5 text-center">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-ash font-light">
-          {frameCount > 1 ? 'Drag to rotate' : 'Interactive View'}
-        </p>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-ash font-light">{frameCount > 1 ? 'Drag to rotate' : 'Interactive View'}</p>
       </div>
-
       {frameCount > 1 && (
         <div className="mt-3 flex justify-center gap-1">
           {Array.from({ length: frameCount }).map((_, i) => (
-            <span key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === currentFrame ? 'bg-ink' : 'bg-stone/60'}`} />
+            <span key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === currentFrame ? 'bg-gold' : 'bg-stone/60'}`} />
           ))}
         </div>
       )}
