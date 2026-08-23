@@ -69,13 +69,13 @@ export default function CheckoutPage() {
     return (
       <div className="pt-32 pb-32 container-lux">
         <div className="max-w-xl mx-auto text-center">
-          <div className="w-16 h-16 border border-ink rounded-full flex items-center justify-center mx-auto mb-10">
+          <div className="w-16 h-16 border border-stone rounded-full flex items-center justify-center mx-auto mb-10">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M5 13l4 4L19 7" /></svg>
           </div>
           <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-5 font-light">Order Confirmed</p>
           <h1 className="font-display text-3xl md:text-[40px] mb-6">Thank You</h1>
           <p className="text-ash mb-10 font-light text-[15px]">
-            Your order <span className="text-ink font-medium">{orderComplete}</span> has been placed successfully.
+            Your order <span className="text-cream font-medium">{orderComplete}</span> has been placed successfully.
             We'll contact you shortly to confirm delivery.
           </p>
           <Link href="/shop" className="btn-primary inline-flex"><span>Continue Shopping</span></Link>
@@ -104,19 +104,19 @@ export default function CheckoutPage() {
               <div>
                 <h2 className="text-[10px] uppercase tracking-[0.25em] mb-6 font-light">Contact Information</h2>
                 <div className="space-y-4">
-                  <input name="name" required placeholder="Full name" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
-                  <input name="email" type="email" required placeholder="Email address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
-                  <input name="phone" type="tel" required placeholder="Phone number" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                  <input name="name" required placeholder="Full name" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
+                  <input name="email" type="email" required placeholder="Email address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
+                  <input name="phone" type="tel" required placeholder="Phone number" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
                 </div>
               </div>
 
               <div>
                 <h2 className="text-[10px] uppercase tracking-[0.25em] mb-6 font-light">Shipping Address</h2>
                 <div className="space-y-4">
-                  <input name="address" required placeholder="Street address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                  <input name="address" required placeholder="Street address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
                   <div className="grid grid-cols-2 gap-4">
-                    <input name="city" required placeholder="City" className="border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
-                    <input name="postal" required placeholder="Postal code" className="border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                    <input name="city" required placeholder="City" className="border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
+                    <input name="postal" required placeholder="Postal code" className="border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
                   </div>
                   <input value="Pakistan" readOnly className="w-full border border-stone px-5 py-4 text-sm text-ash bg-stone/30" />
                 </div>
@@ -124,7 +124,7 @@ export default function CheckoutPage() {
 
               <div>
                 <h2 className="text-[10px] uppercase tracking-[0.25em] mb-6 font-light">Payment Method</h2>
-                <div className="border border-ink p-5 flex items-center gap-4">
+                <div className="border border-stone p-5 flex items-center gap-4">
                   <input type="radio" id="cod" checked readOnly className="accent-ink" />
                   <label htmlFor="cod" className="text-sm">Cash on Delivery</label>
                   <span className="text-[10px] text-ash uppercase tracking-wide ml-auto">Available</span>

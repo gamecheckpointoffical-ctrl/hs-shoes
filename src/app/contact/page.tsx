@@ -25,11 +25,11 @@ export default function ContactPage() {
             <div className="space-y-10">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-ash mb-3 font-light">Phone</p>
-                <a href="tel:003175477734" className="text-lg hover:text-ash transition-colors">+92 317 5477734</a>
+                <a href="tel:003175477734" className="text-lg hover:text-gold transition-colors">+92 317 5477734</a>
               </div>
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-ash mb-3 font-light">Email</p>
-                <a href="mailto:hello@hsshoes.com" className="text-lg hover:text-ash transition-colors">hello@hsshoes.com</a>
+                <a href="mailto:hello@hsshoes.com" className="text-lg hover:text-gold transition-colors">hello@hsshoes.com</a>
               </div>
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-ash mb-3 font-light">Region</p>
@@ -45,10 +45,10 @@ export default function ContactPage() {
           <div>
             <h2 className="font-display text-2xl md:text-3xl mb-10">Send a Message</h2>
             <form className="space-y-5">
-              <input required placeholder="Your name" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
-              <input required type="email" placeholder="Email address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
-              <input type="tel" placeholder="Phone (optional)" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
-              <textarea required placeholder="Your message" rows={5} className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors resize-none" />
+              <input required placeholder="Your name" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
+              <input required type="email" placeholder="Email address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
+              <input type="tel" placeholder="Phone (optional)" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors" />
+              <textarea required placeholder="Your message" rows={5} className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-gold transition-colors resize-none" />
               <button type="submit" className="btn-primary w-full"><span>Send Message</span></button>
             </form>
           </div>

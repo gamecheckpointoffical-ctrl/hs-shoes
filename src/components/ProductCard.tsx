@@ -19,7 +19,7 @@ export default function ProductCard({ product, image }: { product: Product; imag
           </span>
         )}
         {!hasSale && product.new_arrival && (
-          <span className="absolute top-5 left-5 text-[9px] uppercase tracking-[0.2em] px-3 py-1.5 bg-cream/90 text-ink backdrop-blur-sm">
+          <span className="absolute top-5 left-5 text-[9px] uppercase tracking-[0.2em] px-3 py-1.5 bg-gold text-ink backdrop-blur-sm">
             New
           </span>
         )}

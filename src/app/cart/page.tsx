@@ -39,11 +39,11 @@ export default function CartPage() {
                     <p className="text-sm mt-2">{formatPrice(item.price)}</p>
                     <div className="flex items-center gap-5 mt-auto pt-3">
                       <div className="flex items-center gap-3">
-                        <button onClick={() => updateQuantity(i, item.quantity - 1)} className="w-8 h-8 border border-stone hover:border-ink text-ash hover:text-ink transition-all flex items-center justify-center">−</button>
+                        <button onClick={() => updateQuantity(i, item.quantity - 1)} className="w-8 h-8 border border-stone hover:border-gold text-ash hover:text-gold transition-all flex items-center justify-center">−</button>
                         <span className="text-sm">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(i, item.quantity + 1)} className="w-8 h-8 border border-stone hover:border-ink text-ash hover:text-ink transition-all flex items-center justify-center">+</button>
+                        <button onClick={() => updateQuantity(i, item.quantity + 1)} className="w-8 h-8 border border-stone hover:border-gold text-ash hover:text-gold transition-all flex items-center justify-center">+</button>
                       </div>
-                      <button onClick={() => removeItem(i)} className="text-[10px] text-ash hover:text-ink uppercase tracking-wide ml-auto transition-colors">Remove</button>
+                      <button onClick={() => removeItem(i)} className="text-[10px] text-ash hover:text-gold uppercase tracking-wide ml-auto transition-colors">Remove</button>
                     </div>
                   </div>
                 </div>
