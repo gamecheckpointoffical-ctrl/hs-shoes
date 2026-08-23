@@ -1,6 +1,7 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
+import MagneticButton from './MagneticButton';
 
 export default function Hero({ image }: { image?: string }) {
   const [mounted, setMounted] = useState(false);
@@ -22,7 +23,6 @@ export default function Hero({ image }: { image?: string }) {
         }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={image} alt="HS Shoes Signature Collection" className="w-full h-full object-cover" style={{ filter: 'brightness(0.85) contrast(1.08) saturate(0.95)' }} />
-          {/* Gradient using new cream #F5F3EE */}
           <div className="absolute inset-0" style={{
             background: 'linear-gradient(180deg, rgba(245,243,238,0.12) 0%, rgba(245,243,238,0) 30%, rgba(245,243,238,0) 45%, rgba(245,243,238,0.75) 100%)'
           }} />
@@ -46,8 +46,12 @@ export default function Hero({ image }: { image?: string }) {
             Crafted to Be<br/>Remembered.
           </h1>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/shop" className="btn-primary" data-cursor="shop"><span>Shop Collection</span></Link>
-            <Link href="/about" className="btn-outline" data-cursor="explore">Explore HS</Link>
+            <MagneticButton href="/shop" className="btn-primary" strength={0.35} data-cursor="shop">
+              <span>Shop Collection</span>
+            </MagneticButton>
+            <MagneticButton href="/about" className="btn-outline" strength={0.25} data-cursor="explore">
+              Explore HS
+            </MagneticButton>
           </div>
         </div>
       </div>

@@ -145,3 +145,34 @@ input, textarea, select {
   .custom-cursor { display: none !important; }
   body { cursor: auto !important; }
 }
+
+/* Magnetic Button */
+.magnetic-wrap {
+  display: inline-flex;
+  position: relative;
+  will-change: transform;
+}
+
+/* Magnetic button inner content shifts slightly more for depth */
+.magnetic-inner {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Magnetic active state on hover */
+.magnetic-active .magnetic-inner {
+  transform: scale(0.98);
+}
+
+/* Smooth cursor transition for all interactive elements */
+@media (min-width: 1024px) and (pointer: fine) {
+  a, button, [role="button"], [data-cursor] {
+    cursor: none !important;
+  }
+}
+
+/* Ensure cursor doesn't interfere with text selection */
+::selection {
+  background: var(--ink);
+  color: var(--cream);
+}
