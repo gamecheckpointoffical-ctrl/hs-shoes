@@ -1,12 +1,22 @@
-export function formatPrice(price: number, currency: string = 'USD'): string {
-  const symbols: Record<string, string> = { USD: '$', EUR: '€', GBP: '£', PKR: 'Rs ' };
-  const symbol = symbols[currency] || '$';
-  return `${symbol}${price.toFixed(2)}`;
+export function formatPrice(amount: number, currency: string = 'PKR'): string {
+  if (currency === 'PKR') {
+    return `PKR ${Math.round(amount).toLocaleString('en-PK')}`;
+  }
+  if (currency === 'USD') {
+    return `$${amount.toFixed(2)}`;
+  }
+  return `${currency} ${Math.round(amount).toLocaleString()}`;
+}
+
+export function formatPriceShort(amount: number, currency: string = 'PKR'): string {
+  if (currency === 'PKR') {
+    return `Rs ${Math.round(amount).toLocaleString('en-PK')}`;
+  }
+  return formatPrice(amount, currency);
 }
 
 export function generateOrderNumber(): string {
-  const date = new Date();
-  const year = date.getFullYear();
+  const year = new Date().getFullYear();
   const random = Math.floor(100000 + Math.random() * 900000);
   return `HS-${year}-${random}`;
 }

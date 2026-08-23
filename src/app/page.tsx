@@ -35,8 +35,19 @@ export default async function HomePage() {
     <div>
       <Hero image={heroImage} />
 
+      {/* Philosophy Quote */}
+      <section className="py-24 md:py-40 px-6 bg-cream">
+        <div className="max-w-3xl mx-auto text-center">
+          <span className="font-display text-5xl text-ash/30 leading-none mb-8 block">"</span>
+          <blockquote className="font-display text-2xl md:text-[34px] text-ink text-balance leading-[1.3] mb-10">
+            A gentleman is known by the shoes he wears — and the silence with which he wears them.
+          </blockquote>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-ash font-light">— The HS Philosophy</p>
+        </div>
+      </section>
+
       {/* Featured */}
-      <section className="section-pad">
+      <section className="section-pad border-t border-stone">
         <div className="container-lux">
           <div className="text-center mb-20">
             <div className="flex items-center justify-center gap-3 mb-5">

@@ -5,13 +5,18 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-cream pt-28 pb-12 px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
-        {/* Top section */}
         <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-12 mb-24">
           <div className="col-span-2 md:col-span-5">
             <h3 className="font-display text-3xl md:text-4xl mb-5">HS Shoes</h3>
-            <p className="text-sm text-cream/40 leading-relaxed max-w-sm font-light">
+            <p className="text-sm text-cream/40 leading-relaxed max-w-sm font-light mb-6">
               Crafted to Be Remembered. Premium luxury footwear, hand-finished from the finest materials.
             </p>
+            <div className="space-y-2">
+              <a href="tel:003175477734" className="flex items-center gap-3 text-sm text-cream/65 hover:text-cream transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                <span>+92 317 5477734</span>
+              </a>
+            </div>
           </div>
           <div className="md:col-span-2 md:col-start-7">
             <h4 className="text-[10px] uppercase tracking-[0.25em] mb-6 text-cream/25">Shop</h4>
@@ -19,7 +24,7 @@ export default function Footer() {
               <li><Link href="/shop" className="text-sm text-cream/65 hover:text-cream transition-colors">All Products</Link></li>
               <li><Link href="/shop?filter=new" className="text-sm text-cream/65 hover:text-cream transition-colors">New Arrivals</Link></li>
               <li><Link href="/shop?filter=bestseller" className="text-sm text-cream/65 hover:text-cream transition-colors">Bestsellers</Link></li>
-              <li><Link href="/shop?category=sneakers" className="text-sm text-cream/65 hover:text-cream transition-colors">Sneakers</Link></li>
+              <li><Link href="/shop?category=boots" className="text-sm text-cream/65 hover:text-cream transition-colors">Boots</Link></li>
             </ul>
           </div>
           <div className="md:col-span-2">
@@ -40,7 +45,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Newsletter */}
         <div className="border-t border-cream/8 pt-20 mb-16">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
             <div>
@@ -51,13 +55,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="border-t border-cream/8 pt-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <p className="text-[10px] text-cream/25 tracking-[0.15em] uppercase">© {new Date().getFullYear()} HS Shoes</p>
+          <p className="text-[10px] text-cream/25 tracking-[0.15em] uppercase">© {new Date().getFullYear()} HS Shoes — Pakistan</p>
           <div className="flex items-center gap-10">
             <span className="text-[10px] text-cream/25 tracking-[0.15em] uppercase">Cash on Delivery</span>
             <span className="text-[10px] text-cream/25 tracking-[0.15em] uppercase">Secure Checkout</span>
-            <span className="text-[10px] text-cream/25 tracking-[0.15em] uppercase">Free Shipping over $300</span>
+            <span className="text-[10px] text-cream/25 tracking-[0.15em] uppercase">Free Shipping over PKR 15,000</span>
           </div>
         </div>
       </div>

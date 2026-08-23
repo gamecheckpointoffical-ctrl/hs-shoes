@@ -46,7 +46,6 @@ export default function ProductDetailClient({
 
   return (
     <div className="pt-20">
-      {/* Breadcrumb */}
       <div className="container-lux py-6">
         <nav className="flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] text-ash">
           <Link href="/" className="hover:text-ink">Home</Link>
@@ -58,7 +57,6 @@ export default function ProductDetailClient({
       </div>
 
       <div className="container-lux grid md:grid-cols-2 gap-8 md:gap-20 pb-32">
-        {/* Left: Gallery / 3D */}
         <div className="md:sticky md:top-24 md:self-start">
           {showViewer ? (
             <ProductViewer3D
@@ -95,7 +93,6 @@ export default function ProductDetailClient({
           )}
         </div>
 
-        {/* Right: Info */}
         <div className="md:pt-4">
           {product.featured && (
             <p className="text-[10px] uppercase tracking-[0.3em] text-gold mb-4 font-light">Signature Collection</p>
@@ -120,10 +117,8 @@ export default function ProductDetailClient({
 
           <p className="text-ash leading-relaxed mb-10 text-[15px] font-light">{product.short_description}</p>
 
-          {/* Divider */}
           <div className="w-full h-px bg-stone mb-10" />
 
-          {/* Color */}
           {colors.length > 0 && (
             <div className="mb-8">
               <p className="text-[10px] uppercase tracking-[0.2em] mb-4">Color: <span className="text-ash normal-case tracking-normal">{selectedColor || 'Select'}</span></p>
@@ -135,7 +130,6 @@ export default function ProductDetailClient({
             </div>
           )}
 
-          {/* Size */}
           {sizes.length > 0 && (
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
@@ -150,7 +144,6 @@ export default function ProductDetailClient({
             </div>
           )}
 
-          {/* Quantity */}
           <div className="mb-8">
             <p className="text-[10px] uppercase tracking-[0.2em] mb-4">Quantity</p>
             <div className="flex items-center gap-5">
@@ -174,7 +167,7 @@ export default function ProductDetailClient({
           <div className="border-t border-stone pt-8 space-y-3">
             <div className="flex items-center gap-3 text-[11px] text-ash">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M5 13l4 4L19 7" /></svg>
-              <span>Free shipping on orders over $300</span>
+              <span>Free shipping on orders over PKR 15,000</span>
             </div>
             <div className="flex items-center gap-3 text-[11px] text-ash">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M5 13l4 4L19 7" /></svg>
@@ -182,7 +175,7 @@ export default function ProductDetailClient({
             </div>
             <div className="flex items-center gap-3 text-[11px] text-ash">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M5 13l4 4L19 7" /></svg>
-              <span>Cash on Delivery available</span>
+              <span>Cash on Delivery available across Pakistan</span>
             </div>
             <div className="flex items-center gap-3 text-[11px] text-ash">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M5 13l4 4L19 7" /></svg>
@@ -190,7 +183,6 @@ export default function ProductDetailClient({
             </div>
           </div>
 
-          {/* Tabs */}
           <div className="mt-16 border-t border-stone pt-10">
             <div className="flex gap-10 mb-8">
               {(['details', 'materials', 'reviews'] as const).map(tab => (
@@ -260,7 +252,6 @@ export default function ProductDetailClient({
         </div>
       </div>
 
-      {/* Related */}
       {relatedProducts.length > 0 && (
         <section className="section-pad border-t border-stone">
           <div className="container-lux">

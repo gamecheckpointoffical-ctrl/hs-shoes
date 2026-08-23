@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/lib/utils/format';
@@ -6,163 +7,181 @@ import Link from 'next/link';
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [orderNumber, setOrderNumber] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('cash_on_delivery');
+  const [processing, setProcessing] = useState(false);
+  const [orderComplete, setOrderComplete] = useState<string | null>(null);
+  const [error, setError] = useState('');
 
-  const shipping = subtotal > 300 ? 0 : 15;
-  const tax = subtotal * 0.08;
-  const total = subtotal + shipping + tax;
+  const shippingCost = subtotal >= 15000 ? 0 : 300;
+  const total = subtotal + shippingCost;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-    
-    const orderData = {
-      customer_name: fd.get('name'),
-      customer_email: fd.get('email'),
-      customer_phone: fd.get('phone'),
+    setProcessing(true);
+    setError('');
+
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    const data = {
+      customer_name: formData.get('name'),
+      customer_email: formData.get('email'),
+      customer_phone: formData.get('phone'),
       shipping_address: {
-        line1: fd.get('address1'),
-        line2: fd.get('address2'),
-        city: fd.get('city'),
-        state: fd.get('state'),
-        postal_code: fd.get('postal'),
-        country: fd.get('country'),
+        line1: formData.get('address'),
+        city: formData.get('city'),
+        postal_code: formData.get('postal'),
+        country: 'Pakistan',
       },
       billing_address: {
-        line1: fd.get('address1'),
-        city: fd.get('city'),
-        postal_code: fd.get('postal'),
-        country: fd.get('country'),
+        line1: formData.get('address'),
+        city: formData.get('city'),
+        postal_code: formData.get('postal'),
+        country: 'Pakistan',
       },
-      items,
-      subtotal,
-      shipping_cost: shipping,
-      tax,
-      total,
-      payment_provider: paymentMethod,
+      items: items.map(i => ({
+        product_id: i.product_id, name: i.name, slug: i.slug, price: i.price,
+        image: i.image, size: i.size, color: i.color, quantity: i.quantity, variant_id: i.variant_id,
+      })),
+      subtotal, shipping_cost: shippingCost, tax: 0, total,
+      payment_provider: 'cash_on_delivery',
     };
 
-    const res = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(orderData),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (data.order_number) {
-      setOrderNumber(data.order_number);
-      setSuccess(true);
-      clearCart();
+    try {
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setOrderComplete(result.order_number);
+        clearCart();
+        (form as HTMLFormElement).reset();
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+    } catch {
+      setError('Network error. Please try again.');
     }
+    setProcessing(false);
   };
 
-  if (items.length === 0 && !success) {
+  if (orderComplete) {
     return (
-      <div className="container-lux pt-32 pb-20 text-center">
-        <h1 className="font-display text-4xl mb-6">Checkout</h1>
-        <p className="text-ash mb-6">Your cart is empty.</p>
-        <Link href="/shop" className="btn-primary">Browse Collection</Link>
-      </div>
-    );
-  }
-
-  if (success) {
-    return (
-      <div className="container-lux pt-32 pb-20 text-center max-w-2xl mx-auto">
-        <div className="w-16 h-16 mx-auto mb-8 border-2 border-ink rounded-full flex items-center justify-center">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6 9 17l-5-5" /></svg>
+      <div className="pt-32 pb-32 container-lux">
+        <div className="max-w-xl mx-auto text-center">
+          <div className="w-16 h-16 border border-ink rounded-full flex items-center justify-center mx-auto mb-10">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-5 font-light">Order Confirmed</p>
+          <h1 className="font-display text-3xl md:text-[40px] mb-6">Thank You</h1>
+          <p className="text-ash mb-10 font-light text-[15px]">
+            Your order <span className="text-ink font-medium">{orderComplete}</span> has been placed successfully.
+            We'll contact you shortly to confirm delivery.
+          </p>
+          <Link href="/shop" className="btn-primary inline-flex"><span>Continue Shopping</span></Link>
         </div>
-        <h1 className="font-display text-4xl mb-4">Order Confirmed</h1>
-        <p className="text-ash mb-2">Thank you for your order.</p>
-        <p className="text-sm text-ash mb-8">Order Number: <span className="text-ink font-medium">{orderNumber}</span></p>
-        <p className="text-sm text-ash mb-8">
-          {paymentMethod === 'cash_on_delivery' 
-            ? 'Pay with cash when your order arrives.' 
-            : 'You will receive a confirmation email shortly.'}
-        </p>
-        <Link href="/shop" className="btn-primary">Continue Shopping</Link>
       </div>
     );
   }
 
   return (
-    <div className="container-lux pt-32 pb-20">
-      <h1 className="font-display text-4xl mb-12">Checkout</h1>
-      <form onSubmit={handleSubmit} className="grid md:grid-cols-3 gap-12">
-        <div className="md:col-span-2 space-y-8">
-          {/* Contact */}
-          <div>
-            <h2 className="text-xs uppercase tracking-widest mb-4">Contact Information</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <input required name="name" placeholder="Full name" className="border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-              <input required type="email" name="email" placeholder="Email" className="border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-              <input required name="phone" placeholder="Phone" className="border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-            </div>
-          </div>
-          {/* Shipping */}
-          <div>
-            <h2 className="text-xs uppercase tracking-widest mb-4">Shipping Address</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <input required name="address1" placeholder="Address line 1" className="col-span-2 border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-              <input name="address2" placeholder="Address line 2 (optional)" className="col-span-2 border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-              <input required name="city" placeholder="City" className="border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-              <input name="state" placeholder="State/Province" className="border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-              <input required name="postal" placeholder="Postal code" className="border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-              <input required name="country" placeholder="Country" defaultValue="" className="border border-stone px-4 py-3 text-sm focus:outline-none focus:border-ink" />
-            </div>
-          </div>
-          {/* Payment */}
-          <div>
-            <h2 className="text-xs uppercase tracking-widest mb-4">Payment Method</h2>
-            <div className="space-y-2">
-              <label className={`flex items-center gap-3 border p-4 cursor-pointer transition-colors ${paymentMethod === 'cash_on_delivery' ? 'border-ink' : 'border-stone'}`}>
-                <input type="radio" name="payment" value="cash_on_delivery" checked={paymentMethod === 'cash_on_delivery'} onChange={() => setPaymentMethod('cash_on_delivery')} />
-                <div><p className="text-sm font-medium">Cash on Delivery</p><p className="text-xs text-ash">Pay with cash when your order arrives.</p></div>
-              </label>
-              <label className={`flex items-center gap-3 border p-4 cursor-pointer transition-colors opacity-50 ${paymentMethod === 'stripe' ? 'border-ink' : 'border-stone'}`}>
-                <input type="radio" name="payment" value="stripe" disabled onChange={() => setPaymentMethod('stripe')} />
-                <div><p className="text-sm font-medium">Credit Card (Stripe)</p><p className="text-xs text-ash">Coming soon — requires Stripe configuration.</p></div>
-              </label>
-              <label className={`flex items-center gap-3 border p-4 cursor-pointer transition-colors opacity-50 ${paymentMethod === 'paypal' ? 'border-ink' : 'border-stone'}`}>
-                <input type="radio" name="payment" value="paypal" disabled onChange={() => setPaymentMethod('paypal')} />
-                <div><p className="text-sm font-medium">PayPal</p><p className="text-xs text-ash">Coming soon — requires PayPal configuration.</p></div>
-              </label>
-            </div>
-          </div>
+    <div className="pt-20">
+      <div className="container-lux py-12 md:py-20">
+        <div className="text-center mb-16">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-5 font-light">Checkout</p>
+          <h1 className="font-display text-3xl md:text-[40px]">Complete Your Order</h1>
         </div>
 
-        {/* Summary */}
-        <div className="border border-stone p-6 h-fit space-y-4">
-          <h2 className="text-xs uppercase tracking-widest mb-4">Order Summary</h2>
-          {items.map((item, idx) => (
-            <div key={idx} className="flex gap-3 text-sm">
-              <div className="w-12 h-16 bg-stone flex-shrink-0 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-1">
-                <p className="text-xs font-medium">{item.name}</p>
-                <p className="text-xs text-ash">{item.size} · {item.color} · Qty {item.quantity}</p>
-                <p className="text-xs">{formatPrice(item.price * item.quantity)}</p>
-              </div>
-            </div>
-          ))}
-          <div className="border-t border-stone pt-4 space-y-2">
-            <div className="flex justify-between text-sm"><span className="text-ash">Subtotal</span><span>{formatPrice(subtotal)}</span></div>
-            <div className="flex justify-between text-sm"><span className="text-ash">Shipping</span><span>{shipping === 0 ? 'Free' : formatPrice(shipping)}</span></div>
-            <div className="flex justify-between text-sm"><span className="text-ash">Tax (8%)</span><span>{formatPrice(tax)}</span></div>
-            <div className="flex justify-between font-medium pt-2 border-t border-stone"><span>Total</span><span>{formatPrice(total)}</span></div>
+        {items.length === 0 ? (
+          <div className="text-center py-32">
+            <p className="text-ash mb-8 text-lg font-light">Your cart is empty.</p>
+            <Link href="/shop" className="btn-primary inline-flex"><span>Browse Collection</span></Link>
           </div>
-          <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-50">
-            {loading ? 'Processing...' : 'Place Order'}
-          </button>
-        </div>
-      </form>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-12 md:gap-24 max-w-6xl mx-auto">
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div>
+                <h2 className="text-[10px] uppercase tracking-[0.25em] mb-6 font-light">Contact Information</h2>
+                <div className="space-y-4">
+                  <input name="name" required placeholder="Full name" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                  <input name="email" type="email" required placeholder="Email address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                  <input name="phone" type="tel" required placeholder="Phone number" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                </div>
+              </div>
+
+              <div>
+                <h2 className="text-[10px] uppercase tracking-[0.25em] mb-6 font-light">Shipping Address</h2>
+                <div className="space-y-4">
+                  <input name="address" required placeholder="Street address" className="w-full border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                  <div className="grid grid-cols-2 gap-4">
+                    <input name="city" required placeholder="City" className="border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                    <input name="postal" required placeholder="Postal code" className="border border-stone px-5 py-4 text-sm focus:outline-none focus:border-ink transition-colors" />
+                  </div>
+                  <input value="Pakistan" readOnly className="w-full border border-stone px-5 py-4 text-sm text-ash bg-stone/30" />
+                </div>
+              </div>
+
+              <div>
+                <h2 className="text-[10px] uppercase tracking-[0.25em] mb-6 font-light">Payment Method</h2>
+                <div className="border border-ink p-5 flex items-center gap-4">
+                  <input type="radio" id="cod" checked readOnly className="accent-ink" />
+                  <label htmlFor="cod" className="text-sm">Cash on Delivery</label>
+                  <span className="text-[10px] text-ash uppercase tracking-wide ml-auto">Available</span>
+                </div>
+                <p className="text-[11px] text-ash mt-3 font-light">Pay with cash when your order arrives. Additional payment methods coming soon.</p>
+              </div>
+
+              {error && <p className="text-xs text-red-600">{error}</p>}
+
+              <button type="submit" disabled={processing} className="btn-primary w-full disabled:opacity-30">
+                <span>{processing ? 'Processing...' : 'Place Order'}</span>
+              </button>
+            </form>
+
+            {/* Summary */}
+            <div className="md:pt-12">
+              <div className="bg-stone/40 p-8">
+                <h2 className="text-[10px] uppercase tracking-[0.25em] mb-8 font-light">Order Summary</h2>
+                <div className="space-y-5 mb-8">
+                  {items.map((item, i) => (
+                    <div key={i} className="flex gap-4">
+                      <div className="w-16 h-20 bg-stone flex-shrink-0 overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">{item.name}</p>
+                        <p className="text-[10px] text-ash mt-1 uppercase tracking-wide">{item.size} · {item.color} · Qty {item.quantity}</p>
+                        <p className="text-sm mt-2">{formatPrice(item.price)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t border-stone pt-6 space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-ash">Subtotal</span>
+                    <span className="text-sm">{formatPrice(subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-ash">Shipping</span>
+                    <span className="text-sm">{shippingCost === 0 ? 'Free' : formatPrice(shippingCost)}</span>
+                  </div>
+                  <div className="flex justify-between pt-3 border-t border-stone">
+                    <span className="text-sm font-medium">Total</span>
+                    <span className="text-lg font-medium">{formatPrice(total)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-[11px] text-ash mt-5 font-light text-center">
+                Free shipping on orders over PKR 15,000
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

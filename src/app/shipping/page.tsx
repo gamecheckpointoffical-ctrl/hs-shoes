@@ -1,15 +1,29 @@
-export const metadata = { title: 'Shipping Policy — HS Shoes', description: 'HS Shoes shipping information.' };
 export default function ShippingPage() {
   return (
-    <div className="container-lux pt-32 pb-20 max-w-3xl mx-auto">
-      <h1 className="font-display text-4xl mb-8">Shipping Policy</h1>
-      <div className="prose prose-sm text-ash space-y-6">
-        <div><h2 className="text-ink text-lg mb-2">Free Shipping</h2><p>Free standard shipping on all orders over $300.</p></div>
-        <div><h2 className="text-ink text-lg mb-2">Standard Shipping</h2><p>Flat rate of $15 for orders under $300. Delivery within 5–7 business days.</p></div>
-        <div><h2 className="text-ink text-lg mb-2">Express Shipping</h2><p>$30 flat rate. Delivery within 2–3 business days.</p></div>
-        <div><h2 className="text-ink text-lg mb-2">International Shipping</h2><p>We ship worldwide. Rates calculated at checkout based on destination.</p></div>
-        <div><h2 className="text-ink text-lg mb-2">Cash on Delivery</h2><p>COD available in select regions. Pay with cash when your order arrives.</p></div>
-        <div><h2 className="text-ink text-lg mb-2">Tracking</h2><p>All orders include tracking. You will receive a tracking number via email once your order ships.</p></div>
+    <div className="pt-20">
+      <div className="container-lux py-12 md:py-20">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-ash mb-5 font-light">Information</p>
+          <h1 className="font-display text-3xl md:text-[44px] mb-12">Shipping Policy</h1>
+          <div className="space-y-8 text-ash text-[15px] leading-relaxed font-light">
+            <div>
+              <h2 className="text-ink text-base font-medium mb-3">Pakistan Standard Shipping</h2>
+              <p>Orders within Pakistan are shipped via reliable courier services. Standard delivery takes 3-5 business days. Shipping cost is PKR 300, or free on orders above PKR 15,000.</p>
+            </div>
+            <div>
+              <h2 className="text-ink text-base font-medium mb-3">Processing Time</h2>
+              <p>All orders are processed within 24-48 hours of placement. You will receive a confirmation call before dispatch.</p>
+            </div>
+            <div>
+              <h2 className="text-ink text-base font-medium mb-3">Cash on Delivery</h2>
+              <p>Cash on Delivery is available across Pakistan. Please have the exact amount ready when your order arrives.</p>
+            </div>
+            <div>
+              <h2 className="text-ink text-base font-medium mb-3">Tracking</h2>
+              <p>A tracking number will be provided once your order has been dispatched. You can track your shipment through the courier's website.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
